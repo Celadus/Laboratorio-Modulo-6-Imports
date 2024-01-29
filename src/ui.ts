@@ -1,4 +1,5 @@
 // ui.ts
+
 import {dameNumeroAleatorio, obtenerNumeroDeCarta, obtenerUrlCarta,  damePuntuacion, sumaPuntuacion} from './motor';
 import { partida } from './model';
 
