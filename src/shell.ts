@@ -1,7 +1,5 @@
 /*Shell*/
 
-import {nuevaPartida} from './ui'
+import { nuevaPartida } from "./ui";
 
-
-nuevaPartida();
-
+document.addEventListener("DOMContentLoad", nuevaPartida);

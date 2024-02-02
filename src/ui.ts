@@ -1,12 +1,18 @@
 // ui.ts
 
-import {dameNumeroAleatorio, obtenerNumeroDeCarta, obtenerUrlCarta,  damePuntuacion, sumaPuntuacion} from './motor';
-import { partida } from './model';
+import {
+  dameNumeroAleatorio,
+  obtenerNumeroDeCarta,
+  obtenerUrlCarta,
+  damePuntuacion,
+  sumaPuntuacion,
+} from "./motor";
+import { partida, setPartida } from "./model";
 
-const btnPedir = document.getElementById('btn_pedir');
-const btnNuevaPartida = document.getElementById('btn_nueva_partida');
-const btnPlantarse = document.getElementById('btn_plantarse');
-const btnHistorial = document.getElementById('btn_historial');
+const btnPedir = document.getElementById("btn_pedir");
+const btnNuevaPartida = document.getElementById("btn_nueva_partida");
+const btnPlantarse = document.getElementById("btn_plantarse");
+const btnHistorial = document.getElementById("btn_historial");
 
 function mostrarCarta(carta: number) {
   const urlCarta = obtenerUrlCarta(carta);
@@ -21,11 +27,17 @@ function dameCarta(): void {
   const carta = obtenerNumeroDeCarta(numeroAleatorio);
   mostrarCarta(carta);
   const puntos = damePuntuacion(carta);
-  sumaPuntuacion(puntos);
+  const puntosSumados = sumaPuntuacion(puntos);
+  setPartida(puntosSumados);
   finalDeLaMano();
 }
 
-function invocarBotones (valorHistorial: boolean, valorNuevaPartida: boolean, valorPedirCarta: boolean, valorPlantarse: boolean) {
+function invocarBotones(
+  valorHistorial: boolean,
+  valorNuevaPartida: boolean,
+  valorPedirCarta: boolean,
+  valorPlantarse: boolean
+) {
   deshabilitarBotonHistorial(valorHistorial);
   deshabilitarBotonNuevaPartida(valorNuevaPartida);
   deshabilitarBotonPedirCarta(valorPedirCarta);
@@ -33,17 +45,17 @@ function invocarBotones (valorHistorial: boolean, valorNuevaPartida: boolean, va
 }
 
 function revisarMano() {
-if (partida.puntosTotales === 7.5) {
-  ganarPartida();
-}
-if (partida.puntosTotales > 7.5) {
-  gameOver();
-}
+  if (partida.puntosTotales === 7.5) {
+    ganarPartida();
+  }
+  if (partida.puntosTotales > 7.5) {
+    gameOver();
+  }
 }
 
 function ganarPartida() {
-mostrarMensaje(`¡ Lo has clavado! ¡Enhorabuena ! ${partida.puntosTotales}`);
-invocarBotones(true, false, true, true);
+  mostrarMensaje(`¡ Lo has clavado! ¡Enhorabuena ! ${partida.puntosTotales}`);
+  invocarBotones(true, false, true, true);
 }
 
 function gameOver() {
@@ -80,7 +92,9 @@ export function historial() {
   const carta = obtenerNumeroDeCarta(numeroAleatorio);
   mostrarCarta(carta);
   const puntos = damePuntuacion(carta);
-  sumaPuntuacion(puntos);
+  const puntosSumados = sumaPuntuacion(puntos);
+  console.log(puntosSumados);
+  setPartida(puntosSumados);
   monstrarMensajeFuturo(partida.puntosTotales);
   invocarBotones(true, false, false, false);
 }
@@ -200,20 +214,32 @@ if (
   });
 }
 
-if (btnNuevaPartida !== null && btnNuevaPartida !== undefined && btnNuevaPartida instanceof HTMLButtonElement){
-  btnNuevaPartida.addEventListener('click', () => {
+if (
+  btnNuevaPartida !== null &&
+  btnNuevaPartida !== undefined &&
+  btnNuevaPartida instanceof HTMLButtonElement
+) {
+  btnNuevaPartida.addEventListener("click", () => {
     nuevaPartida();
   });
 }
 
-if (btnPlantarse !== null && btnPlantarse !== undefined && btnPlantarse instanceof HTMLButtonElement){
-  btnPlantarse.addEventListener('click', () => {
+if (
+  btnPlantarse !== null &&
+  btnPlantarse !== undefined &&
+  btnPlantarse instanceof HTMLButtonElement
+) {
+  btnPlantarse.addEventListener("click", () => {
     plantarse();
   });
 }
 
-if (btnHistorial !== null && btnHistorial !== undefined && btnHistorial instanceof HTMLButtonElement){
-  btnHistorial.addEventListener('click', () => {
+if (
+  btnHistorial !== null &&
+  btnHistorial !== undefined &&
+  btnHistorial instanceof HTMLButtonElement
+) {
+  btnHistorial.addEventListener("click", () => {
     historial();
   });
 }

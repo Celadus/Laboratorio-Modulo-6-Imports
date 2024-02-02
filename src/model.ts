@@ -1,5 +1,13 @@
 // modello.ts
 
-let puntosTotales: number = 0;
-export let partida: { puntosTotales: number } = { puntosTotales };
+const puntosTotales: number = 0;
 
+interface Partida {
+  puntosTotales: number;
+}
+
+export let partida: Partida = { puntosTotales };
+
+export const setPartida = (nuevosPuntos: number) => {
+  partida.puntosTotales = nuevosPuntos;
+};

@@ -1,6 +1,6 @@
 // motore.ts
 
-import { partida } from './model';
+import { partida } from "./model";
 
 export function dameNumeroAleatorio(): number {
   return Math.floor(Math.random() * 10) + 1;
@@ -55,6 +55,6 @@ export function damePuntuacion(carta: number) {
   return carta <= 7 ? carta : 0.5;
 }
 
-export function sumaPuntuacion(puntos: number): void {
-  partida.puntosTotales += puntos;
+export function sumaPuntuacion(puntos: number): number {
+  return partida.puntosTotales + puntos;
 }
